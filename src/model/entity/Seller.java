@@ -4,7 +4,8 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
 
-public class Seller {
+public class Seller implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     private Integer id;
     private String name;
@@ -12,12 +13,15 @@ public class Seller {
     private Date brithDate;
     private Double salary;
 
-    public Seller(Integer id, String name, String email, Date brithDate, Double salary) {
+    private Department department;
+
+    public Seller(Integer id, String name, String email, Date brithDate, Double salary, Department department) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.brithDate = brithDate;
         this.salary = salary;
+        this.department = department;
     }
 
     public Integer getId() {
@@ -56,8 +60,39 @@ public class Seller {
         return salary;
     }
 
+    public void setSalary(Double salary) {
+        this.salary = salary;
+    }
 
+    public Department getDepartment() {
+        return department;
+    }
 
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Seller seller = (Seller) o;
+        return Objects.equals(id, seller.id);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
+
+    @Override
+    public String toString() {
+        return "Seller{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", brithDate=" + brithDate +
+                ", salary=" + salary +
+                ", department=" + department +
+                '}';
+    }
 }
